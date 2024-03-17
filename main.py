@@ -1,16 +1,15 @@
-# This is a sample Python script.
+from utils.code import print_data
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+s1 = print_data('data/operations.json')
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+for i in s1:
+    print(i)
+    #if 'to' in i:
+    #    print(f'{i["date"]} {i["descr"]}')
+    #    print(f'{i["from"]} -> {i["to"]}')
+    #    print(f'{i["operationAmount"]["amount"]} {i["operationAmount"]["currency"]["name"]}' + '\n')
+    #else:
+    #    print(f'{i["date"]} {i["descr"]}')
+    #    print(f'{i["from"]}')
+    #    print(f'{i["operationAmount"]["amount"]} {i["operationAmount"]["currency"]["name"]}' + '\n')
+#
