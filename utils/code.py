@@ -9,7 +9,9 @@ def load_file(file_name):
 def sort_data(data):
     '''сортировка по state == EXECUTED'''
     sort_operations = [operation for operation in data if 'state' in operation and operation['state'] == 'EXECUTED']
-    return sorted(sort_operations[:5], key=lambda x: x['date'])
+
+    return sorted(sort_operations, key=lambda x: x['date'])
+
 
 
 def format_date(date):
@@ -32,20 +34,16 @@ def secret_card(number):
 
 
 def print_data(data):
-    list1 = []
-    d = load_file(data)
-    d = sort_data(d)
-    for i in d:
-        date = format_date(i['date'])
-        if 'from' in i:
-            from_card = secret_card(i['from'])
-            to_card = secret_card(i['to'])
-            list1.append({"date" : date, "from" : from_card, "to" : to_card, "operationAmount" : i['operationAmount'], "descr" : i['description']})
+    list_corret_data = []
+    sorted_list = sort_data(load_file(data))[-5:]
+    for sort_list in sorted_list:
+        date = format_date(sort_list['date'])
+        if 'from' in sort_list:
+            from_card = secret_card(sort_list['from'])
+            to_card = secret_card(sort_list['to'])
+            list_corret_data.append({"date" : date, "from" : from_card, "to" : to_card, "operationAmount" : sort_list['operationAmount'], "descr" : sort_list['description']})
         else:
-            from_card = secret_card(i['to'])
-            list1.append({"date" : date, "from" : from_card, "operationAmount" : i['operationAmount'],"descr" : i['description']})
+            from_card = secret_card(sort_list['to'])
+            list_corret_data.append({"date" : date, "from" : from_card, "operationAmount" : sort_list['operationAmount'],"descr" : sort_list['description']})
 
-    return list1
-
-#print(print_data('..\data\operations.json'))
-
+    return list_corret_data
